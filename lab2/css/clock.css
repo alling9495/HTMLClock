@@ -1,0 +1,21 @@
+body {
+	background-color : black;
+	text-align: center;
+}
+
+h2 {
+	text-decoration-color: blue;
+	color: white;
+}
+
+#clock {
+	color: #FF9900;
+   text-shadow: 2px 2px #FFCC00;
+   font-size: 60pt;
+}
+
+.heading {
+   color: #000066;
+   font-size: 40pt;
+   text-shadow: 2px 2px #0066CC;
+}
