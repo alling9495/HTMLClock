@@ -8,6 +8,11 @@ h2 {
 	color: white;
 }
 
+h3 {
+	text-decoration-color: red;
+	color: white;	
+}
+
 #clock {
 	color: #FF9900;
    text-shadow: 2px 2px #FFCC00;
