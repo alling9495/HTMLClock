@@ -8,14 +8,47 @@ h2 {
 	color: white;
 }
 
+h3 {
+	color: white;
+   text-shadow: 1px 1px black;
+   font-size: 12pt;
+}
+
 #clock {
 	color: #FF9900;
-   text-shadow: 2px 2px #FFCC00;
+   text-shadow: 2px 2px black;
    font-size: 60pt;
+}
+
+#forecastLabel {
+   color: #FF9900;
+   text-shadow: 1px 1px black;
+   font-size: 12pt;
 }
 
 .heading {
    color: #000066;
    font-size: 40pt;
-   text-shadow: 2px 2px #0066CC;
+   text-shadow: 2px 2px black;
+   text
+}
+
+.chilly {
+	background-color: #1ABC9C;
+}
+
+.cold {
+	background-color: #95A5A6;
+}
+
+.nice {
+	background-color: #2980B9;
+}
+
+.warm {
+	background-color: #E67E22;
+}
+
+.hot {
+	background-color: #E74C3C;
 }
