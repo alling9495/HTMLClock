@@ -8,21 +8,56 @@ function hideAlarmPopup() {
    $("#popup").addClass("hide")
 }
 
-function insertAlarm(hours, mins, ampm, alarmName) {
-   var newDiv = $("<div></div>").addClass("flexable")
+function insertAlarm(time, alarmName, objectId) {
+   var newDiv = $("<div></div>").addClass("flexable").attr("id", objectId)
    newDiv.append($("<div></div>").addClass("name").html(alarmName))
-   newDiv.append($("<div></div>").addClass("time").html(hours + ":" + mins + " " + ampm))
+   newDiv.append($("<div></div>").addClass("time").html(time))
+   newDiv.append($("<input/>").attr("type", "button").attr("value", "Remove").attr("onclick", "destroyAlarm(\"" + objectId + "\")"))
    $("#alarms").append(newDiv)
 }
 
 function addAlarm() {
+   Parse.initialize("RBDIQRH6qHvvm0XycI951Y2T1xgWND2kvxOmmH19", "rA2nOYi9Gc7iGstS9Rzp6fQ0t6OP6fD3Wtg95Mzk")
    var hours = $("#hours option:selected").text()
    var mins = $("#mins option:selected").text()
    var ampm = $("#ampm option:selected").text()
    var alarmName = $("#alarmName").val()
-   insertAlarm(hours, mins, ampm, alarmName)
-   hideAlarmPopup();
+   var time = hours + ":" + mins + " " + ampm;
+   var AlarmObject = Parse.Object.extend("Alarm");
+   var alarmObject = new AlarmObject();
+      alarmObject.save({"time": time,"alarmName": alarmName}, {
+      success: function(object) {
+        insertAlarm(time, alarmName, object.id)
+        hideAlarmPopup();
+      }
+    });
+}
 
+function getAllAlarms() {
+   Parse.initialize("RBDIQRH6qHvvm0XycI951Y2T1xgWND2kvxOmmH19", "rA2nOYi9Gc7iGstS9Rzp6fQ0t6OP6fD3Wtg95Mzk")
+   var AlarmObject = Parse.Object.extend("Alarm");
+   var query = new Parse.Query(AlarmObject);
+   query.find({
+      success: function(results) {
+         for (var i = 0; i < results.length; i++) {
+            console.log(results[i])
+            insertAlarm(results[i].get("time"), results[i].get("alarmName"), results[i].id);
+         }
+      }
+   });
+}
+
+function destroyAlarm(objectId) {
+   console.log(objectId)
+   Parse.initialize("RBDIQRH6qHvvm0XycI951Y2T1xgWND2kvxOmmH19", "rA2nOYi9Gc7iGstS9Rzp6fQ0t6OP6fD3Wtg95Mzk")
+   var AlarmObject = Parse.Object.extend("Alarm");
+   var query = new Parse.Query(AlarmObject);
+   query.get(objectId, {
+      success: function(object) {
+         object.destroy({});
+      }
+   })
+   $("#" + objectId).remove()
 }
 
 function getTime() {
@@ -86,6 +121,8 @@ function initializeOption() {
    }
 }
 
+destroyAlarm("01:00 AM", "Ddfgfg")
 initializeOption()
+getAllAlarms()
 getTime()
 getTemp()

@@ -90,14 +90,14 @@ h2 {
 
 .name {
 	float: left;
-	width: 50%;
+	width: 40%;
 	font-size: 120%;
 	font-weight: bold;
 }
 
 .time {
 	float: right;
-	width: 50%;
+	width: 40%;
 	font-size: 120%;
 	font-weight: bold;
 }
