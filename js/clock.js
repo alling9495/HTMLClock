@@ -1,3 +1,30 @@
+function showAlarmPopup() {
+   $("#mask").removeClass("hide")
+   $("#popup").removeClass("hide")
+}
+
+function hideAlarmPopup() {
+   $("#mask").addClass("hide")
+   $("#popup").addClass("hide")
+}
+
+function insertAlarm(hours, mins, ampm, alarmName) {
+   var newDiv = $("<div></div>").addClass("flexable")
+   newDiv.append($("<div></div>").addClass("name").html(alarmName))
+   newDiv.append($("<div></div>").addClass("time").html(hours + ":" + mins + " " + ampm))
+   $("#alarms").append(newDiv)
+}
+
+function addAlarm() {
+   var hours = $("#hours option:selected").text()
+   var mins = $("#mins option:selected").text()
+   var ampm = $("#ampm option:selected").text()
+   var alarmName = $("#alarmName").val()
+   insertAlarm(hours, mins, ampm, alarmName)
+   hideAlarmPopup();
+
+}
+
 function getTime() {
    var date = new Date()
    time = date.toLocaleTimeString();
@@ -36,5 +63,29 @@ function getTemp() {
    $.getJSON(url, success);
 }
 
+function initializeOption() {
+   var hourStr, minStr;
+   for (hour = 1; hour < 13; hour++) {
+      if (hour >= 1 && hour <= 9) {
+         hourStr = "0" + hour
+      }
+      else {
+         hourStr = hour
+      }
+     $("#hours").append("<option>" + hourStr + "</option>")
+   }
+
+   for (min = 0; min < 60; min++) {
+      if (min >= 0 && min <= 9) {
+         minStr = "0" + min
+      }
+      else {
+         minStr = min
+      }
+     $("#mins").append("<option>" + minStr + "</option>")
+   }
+}
+
+initializeOption()
 getTime()
 getTemp()
