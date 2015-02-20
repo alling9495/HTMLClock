@@ -128,10 +128,6 @@
             });
           }
         </script>
-        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-        </fb:login-button>
-
-        <div id="status">
         </div>
 		</body>
 		<img id="forecastIcon" src="">
@@ -157,6 +153,10 @@
         		<h2>Alarms</h2>
         		<input type="button" value="Add Alarm" class="button" onclick="showAlarmPopup()"/>
     		</div>
+              <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+            </fb:login-button>
+
+            <div id="status">
     		<div id="alarms"></div>
 		</div>
 		<div id="forecastLabel"></div>
