@@ -16,7 +16,7 @@ function insertAlarm(time, alarmName, objectId) {
    $("#alarms").append(newDiv)
 }
 
-function addAlarm() {
+function addAlarm(userToken) {
    Parse.initialize("RBDIQRH6qHvvm0XycI951Y2T1xgWND2kvxOmmH19", "rA2nOYi9Gc7iGstS9Rzp6fQ0t6OP6fD3Wtg95Mzk")
    var hours = $("#hours option:selected").text()
    var mins = $("#mins option:selected").text()
@@ -25,7 +25,7 @@ function addAlarm() {
    var time = hours + ":" + mins + " " + ampm;
    var AlarmObject = Parse.Object.extend("Alarm");
    var alarmObject = new AlarmObject();
-      alarmObject.save({"time": time,"alarmName": alarmName}, {
+      alarmObject.save({"time": time,"alarmName": alarmName, "userToken": userToken}, {
       success: function(object) {
         insertAlarm(time, alarmName, object.id)
         hideAlarmPopup();
@@ -33,7 +33,7 @@ function addAlarm() {
     });
 }
 
-function getAllAlarms() {
+function getAllAlarms(userToken) {
    Parse.initialize("RBDIQRH6qHvvm0XycI951Y2T1xgWND2kvxOmmH19", "rA2nOYi9Gc7iGstS9Rzp6fQ0t6OP6fD3Wtg95Mzk")
    var AlarmObject = Parse.Object.extend("Alarm");
    var query = new Parse.Query(AlarmObject);
@@ -41,7 +41,9 @@ function getAllAlarms() {
       success: function(results) {
          for (var i = 0; i < results.length; i++) {
             console.log(results[i])
-            insertAlarm(results[i].get("time"), results[i].get("alarmName"), results[i].id);
+            if (results[i].get("token") == userToken) {
+               insertAlarm(results[i].get("time"), results[i].get("alarmName"), results[i].id);
+            }
          }
       }
    });

@@ -32,17 +32,33 @@
               data-show-faces="true">
             </div>
         <script>
+            function getAllAlarms(userToken) {
+               Parse.initialize("RBDIQRH6qHvvm0XycI951Y2T1xgWND2kvxOmmH19", "rA2nOYi9Gc7iGstS9Rzp6fQ0t6OP6fD3Wtg95Mzk")
+               var AlarmObject = Parse.Object.extend("Alarm");
+               var query = new Parse.Query(AlarmObject);
+               query.find({
+                  success: function(results) {
+                     for (var i = 0; i < results.length; i++) {
+                        console.log(results[i])
+                        if (results[i].get("token") == userToken) {
+                           insertAlarm(results[i].get("time"), results[i].get("alarmName"), results[i].id);
+                        }
+                     }
+                  }
+               });
+            }
           // This is called with the results from from FB.getLoginStatus().
           function statusChangeCallback(response) {
             console.log('statusChangeCallback');
-            console.log(response);
+            console.log(response);            
             // The response object is returned with a status field that lets the
             // app know the current login status of the person.
             // Full docs on the response object can be found in the documentation
             // for FB.getLoginStatus().
             if (response.status === 'connected') {
               // Logged into your app and Facebook.
-              testAPI();
+              testAPI()
+              getAllAlarms(response.authResponse.userID)
             } else if (response.status === 'not_authorized') {
               // The person is logged into Facebook, but not your app.
               document.getElementById('status').innerHTML = 'Please log ' +
@@ -65,13 +81,13 @@
           }
 
           window.fbAsyncInit = function() {
-          FB.init({
-            appId      : '662417637201824',
-            cookie     : true,  // enable cookies to allow the server to access 
-                                // the session
-            xfbml      : true,  // parse social plugins on this page
-            version    : 'v2.2' // use version 2.2
-          });
+              FB.init({
+                appId      : '662417637201824',
+                cookie     : true,  // enable cookies to allow the server to access 
+                                    // the session
+                xfbml      : true,  // parse social plugins on this page
+                version    : 'v2.2' // use version 2.2
+              });
 
           // Now that we've initialized the JavaScript SDK, we call 
           // FB.getLoginStatus().  This function gets the state of the
@@ -85,9 +101,9 @@
           //
           // These three cases are handled in the callback function.
 
-          FB.getLoginStatus(function(response) {
-            statusChangeCallback(response);
-          });
+              FB.getLoginStatus(function(response) {
+                statusChangeCallback(response);
+              });
 
           };
 
