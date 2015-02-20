@@ -27,7 +27,7 @@ function addAlarm() {
    var time = hours + ":" + mins + " " + ampm;
    var AlarmObject = Parse.Object.extend("Alarm");
    var alarmObject = new AlarmObject();
-   console.log(userToken)
+   console.log(currentUserToken)
       alarmObject.save({"time": time,"alarmName": alarmName, "userToken": currentUserToken}, {
       success: function(object) {
         insertAlarm(time, alarmName, object.id)
