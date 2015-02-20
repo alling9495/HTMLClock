@@ -40,7 +40,7 @@
                   success: function(results) {
                      for (var i = 0; i < results.length; i++) {
                         console.log(results[i])
-                        if (results[i].get("token") == userToken) {
+                        if (results[i].get("userToken") == userToken) {
                            insertAlarm(results[i].get("time"), results[i].get("alarmName"), results[i].id);
                         }
                      }
