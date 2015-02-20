@@ -59,6 +59,7 @@
               // Logged into your app and Facebook.
               testAPI()
               getAllAlarms(response.authResponse.userID)
+              currentUserToken = response.authResponse.userID
             } else if (response.status === 'not_authorized') {
               // The person is logged into Facebook, but not your app.
               document.getElementById('status').innerHTML = 'Please log ' +

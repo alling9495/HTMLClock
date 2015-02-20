@@ -1,3 +1,5 @@
+var currentUserToken
+
 function showAlarmPopup() {
    $("#mask").removeClass("hide")
    $("#popup").removeClass("hide")
@@ -16,7 +18,7 @@ function insertAlarm(time, alarmName, objectId) {
    $("#alarms").append(newDiv)
 }
 
-function addAlarm(userToken) {
+function addAlarm() {
    Parse.initialize("RBDIQRH6qHvvm0XycI951Y2T1xgWND2kvxOmmH19", "rA2nOYi9Gc7iGstS9Rzp6fQ0t6OP6fD3Wtg95Mzk")
    var hours = $("#hours option:selected").text()
    var mins = $("#mins option:selected").text()
@@ -25,7 +27,8 @@ function addAlarm(userToken) {
    var time = hours + ":" + mins + " " + ampm;
    var AlarmObject = Parse.Object.extend("Alarm");
    var alarmObject = new AlarmObject();
-      alarmObject.save({"time": time,"alarmName": alarmName, "userToken": userToken}, {
+   console.log(userToken)
+      alarmObject.save({"time": time,"alarmName": alarmName, "userToken": currentUserToken}, {
       success: function(object) {
         insertAlarm(time, alarmName, object.id)
         hideAlarmPopup();
