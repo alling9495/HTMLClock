@@ -25,12 +25,6 @@
                     fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));
             </script>
-            <div
-              class="fb-like"
-              data-share="true"
-              data-width="450"
-              data-show-faces="true">
-            </div>
         <script>
             function getAllAlarms(userToken) {
                Parse.initialize("RBDIQRH6qHvvm0XycI951Y2T1xgWND2kvxOmmH19", "rA2nOYi9Gc7iGstS9Rzp6fQ0t6OP6fD3Wtg95Mzk")
@@ -128,6 +122,10 @@
             });
           }
         </script>
+        <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
+        </fb:login-button>
+
+        <div id="status">
         </div>
 		</body>
 		<img id="forecastIcon" src="">
@@ -153,10 +151,6 @@
         		<h2>Alarms</h2>
         		<input type="button" value="Add Alarm" class="button" onclick="showAlarmPopup()"/>
     		</div>
-              <fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-            </fb:login-button>
-
-            <div id="status">
     		<div id="alarms"></div>
 		</div>
 		<div id="forecastLabel"></div>
