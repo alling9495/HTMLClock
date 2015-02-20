@@ -8,6 +8,29 @@
 		<body>
 			<h2 class="heading">This Is A Clock</h2>
 			<h1 id="clock"></h1>
+            <script>
+                window.fbAsyncInit = function() {
+                    FB.init({
+                        appId      : '662417637201824',
+                        xfbml      : true,
+                        version    : 'v2.2'
+                    });
+                };
+
+                (function(d, s, id){
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) {return;}
+                    js = d.createElement(s); js.id = id;
+                    js.src = "//connect.facebook.net/en_US/sdk.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+            </script>
+            <div
+              class="fb-like"
+              data-share="true"
+              data-width="450"
+              data-show-faces="true">
+            </div>
 		</body>
 		<img id="forecastIcon" src="">
 		<div id="alarmContainer">
