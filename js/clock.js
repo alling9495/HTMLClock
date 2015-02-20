@@ -33,7 +33,7 @@ function addAlarm(userToken) {
     });
 }
 
-function getAllAlarms(userToken) {
+/*function getAllAlarms(userToken) {
    Parse.initialize("RBDIQRH6qHvvm0XycI951Y2T1xgWND2kvxOmmH19", "rA2nOYi9Gc7iGstS9Rzp6fQ0t6OP6fD3Wtg95Mzk")
    var AlarmObject = Parse.Object.extend("Alarm");
    var query = new Parse.Query(AlarmObject);
@@ -47,7 +47,7 @@ function getAllAlarms(userToken) {
          }
       }
    });
-}
+}*/
 
 function destroyAlarm(objectId) {
    console.log(objectId)
@@ -125,6 +125,5 @@ function initializeOption() {
 
 destroyAlarm("01:00 AM", "Ddfgfg")
 initializeOption()
-getAllAlarms()
 getTime()
 getTemp()
