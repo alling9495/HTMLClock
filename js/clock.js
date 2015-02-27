@@ -28,6 +28,7 @@ function addAlarm() {
    var AlarmObject = Parse.Object.extend("Alarm");
    var alarmObject = new AlarmObject();
    console.log(currentUserToken)
+   ga('send', 'event', 'Alarm', 'Add')
       alarmObject.save({"time": time,"alarmName": alarmName, "userToken": currentUserToken}, {
       success: function(object) {
         insertAlarm(time, alarmName, object.id)
@@ -63,6 +64,7 @@ function destroyAlarm(objectId) {
       }
    })
    $("#" + objectId).remove()
+   ga('send', 'event', 'Alarm', 'Delete');
 }
 
 function getTime() {
